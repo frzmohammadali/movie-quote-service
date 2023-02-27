@@ -1,5 +1,4 @@
 ﻿using MovieQuoteService.Application.Common.Interfaces;
-using MovieQuoteService.Infrastructure.Files;
 using MovieQuoteService.Infrastructure.Identity;
 using MovieQuoteService.Infrastructure.Persistence;
 using MovieQuoteService.Infrastructure.Persistence.Interceptors;
@@ -43,7 +42,6 @@ public static class ConfigureServices
 
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
-        services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
         services.AddAuthentication()
             .AddIdentityServerJwt();

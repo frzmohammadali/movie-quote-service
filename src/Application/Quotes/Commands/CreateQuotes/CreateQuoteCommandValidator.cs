@@ -6,7 +6,7 @@ namespace MovieQuoteService.Application.Quotes.Commands.CreateQuotes;
 
 public class CreateQuoteCommandValidator : AbstractValidator<CreateQuoteCommand>
 {
-    public CreateQuoteCommandValidator()
+    public CreateQuoteCommandValidator(IValidator<MovieCreateInput> movieValidator)
     {
         RuleFor(v => v.Text)
             .NotEmpty()
@@ -17,7 +17,8 @@ public class CreateQuoteCommandValidator : AbstractValidator<CreateQuoteCommand>
             .When(w => w.CharacterId is null);
 
         RuleFor(r => r.MovieCreateInput)
-            .NotEmpty()
+            .NotNull()
+            .SetValidator(movieValidator!)
             .When(w => w.MovieId is null);
 
         RuleFor(r => r.CharacterId)
@@ -29,4 +30,19 @@ public class CreateQuoteCommandValidator : AbstractValidator<CreateQuoteCommand>
             .When(w => w.MovieCreateInput is null);
     }
     
+}
+
+
+public class MovieCreateInputValidator : AbstractValidator<MovieCreateInput>
+{
+    public MovieCreateInputValidator()
+    {
+        RuleFor(v => v.DisplayName)
+            .NotEmpty()
+            .MaximumLength(200);
+
+        RuleFor(r => r.YearOfPublish)
+            .InclusiveBetween(1970, 2050);
+    }
+
 }

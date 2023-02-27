@@ -1,0 +1,84 @@
+<h1>Quotes</h1>
+
+<p *ngIf="!lists"><em>Loading...</em></p>
+
+<div *ngIf="lists">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="clearfix">
+        <button id="listOptions" class="btn btn-default float-end" title="List Options..."
+          (click)="showNewListModal(createQuoteModal)">
+          <i class="bi bi-plus-circle-fill"></i>
+        </button>
+      </div>
+      <ul id="todo-items" class="list-group mb-2">
+        <li class="list-group-item" *ngFor="let item of lists; index as i">
+          <div>
+            <ul>
+                <li>Quote: "{{ item.text }}" - {{ item.character?.displayName }}</li>
+                <li>Movie: {{ item.movie?.displayName }} ({{ item.movie?.yearOfPublish }})</li>
+                <li>Added By: {{ item.userName }}</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="debug">
+  <pre>{{ lists | json }}</pre>
+</div>
+<div *ngIf="debug">
+    <pre>{{ lists | json }}</pre>
+</div>
+
+<ng-template #createQuoteModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New List</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="newListCancelled()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="text">Text</label>
+      <input type="text" class="form-control" id="text" placeholder="quote text..." [(ngModel)]="newListEditor.text"
+         />
+
+    </div>
+    <div class="form-group">
+        <label for="movieCreateInput">Movie Name</label>
+        <input type="text" class="form-control" id="movieCreateInput" placeholder="movie" [(ngModel)]="newListEditor.movieCreateInput.displayName"
+           />
+       
+    </div>
+    <div class="form-group">
+        <label for="movieCreateInputYear">Movie Year</label>
+        <input type="text" class="form-control" id="movieCreateInputYear" placeholder="movie" [(ngModel)]="newListEditor.movieCreateInput.yearOfPublish"
+           />
+        
+    </div>
+    <div class="form-group">
+        <label for="characterCreateInput">Character</label>
+        <input type="text" class="form-control" id="characterCreateInput" placeholder="movie" [(ngModel)]="newListEditor.characterCreateInput.displayName"
+         />
+       
+    </div>
+    <div *ngIf="debug">
+      <pre>{{ newListEditor | json }}</pre>
+    </div>
+    <div *ngIf="serverValidationErrors">
+        <div class="alert alert-danger">
+            <pre>{{ serverValidationErrors | json }}</pre>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer clearfix">
+    <div class="float-end">
+      <button class="btn btn-default" (click)="newListCancelled()">Cancel</button>
+      <button class="btn btn-primary" (click)="addList()">Create</button>
+    </div>
+  </div>
+</ng-template>
