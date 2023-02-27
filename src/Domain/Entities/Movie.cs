@@ -1,6 +1,6 @@
 namespace MovieQuoteService.Domain.Entities;
 
-public class Movie : BaseAuditableEntity
+public class Movie : BaseEntity
 {
     public string DisplayName { get; set; } = default!;
     public int YearOfPublish { get; set; }
