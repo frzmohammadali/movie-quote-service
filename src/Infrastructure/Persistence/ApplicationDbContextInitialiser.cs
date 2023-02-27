@@ -29,6 +29,10 @@ public class ApplicationDbContextInitialiser
             {
                 await _context.Database.MigrateAsync();
             }
+            if (_context.Database.IsSqlite())
+            {
+                await _context.Database.MigrateAsync();
+            }
         }
         catch (Exception ex)
         {

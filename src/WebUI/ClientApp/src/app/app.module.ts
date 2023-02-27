@@ -8,7 +8,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { TokenComponent } from './token/token.component';
 
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
@@ -20,7 +19,6 @@ import { QuotesComponent } from './quotes/quotes.component';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
     TokenComponent,
     QuotesComponent,
   ],
